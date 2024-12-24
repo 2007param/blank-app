@@ -1,7 +1,7 @@
-    import streamlit as st
-    import pandas as pd
-    from collections import Counter
-    from PIL import Image
+import streamlit as st
+import pandas as pd
+from collections import Counter
+from PIL import Image
     
     def footer():
     st.markdown(
