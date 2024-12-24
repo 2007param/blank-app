@@ -2,8 +2,8 @@ import streamlit as st
 import pandas as pd
 from collections import Counter
 from PIL import Image
-    
-    def footer():
+
+def footer():
     st.markdown(
         """
         <footer style='text-align: center; padding: 10px; font-size: 14px; color: #777;'>
@@ -11,11 +11,11 @@ from PIL import Image
         </footer>
         """, unsafe_allow_html=True
     )
-    
-    def is_valid_sequence(sequence):
+
+def is_valid_sequence(sequence):
     return all(base in 'ACTG' for base in sequence)
-    
-    def apply_background_color(color):
+
+def apply_background_color(color):
     st.markdown(
         f"""
         <style>
@@ -26,17 +26,17 @@ from PIL import Image
         """,
         unsafe_allow_html=True
     )
-    
-    def get_nucleotide_count(sequence):
+
+def get_nucleotide_count(sequence):
     if is_valid_sequence(sequence):
         apply_background_color("#FFC0CB")  
         return {'A': sequence.count('A'), 'T': sequence.count('T'),
                 'C': sequence.count('C'), 'G': sequence.count('G')}
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for k-mer analysis
-    def kmer_analysis(sequence, k):
+
+# Function for k-mer analysis
+def kmer_analysis(sequence, k):
     if is_valid_sequence(sequence):
         kmers = {}
         for i in range(len(sequence) - k + 1):
@@ -46,9 +46,9 @@ from PIL import Image
         return kmers
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Hamming distance
-    def hamming_distance(seq1, seq2):
+
+# Function for Hamming distance
+def hamming_distance(seq1, seq2):
     if len(seq1) != len(seq2):
         return "Error: Sequences must have the same length"
     if is_valid_sequence(seq1) and is_valid_sequence(seq2):
@@ -56,9 +56,9 @@ from PIL import Image
         return sum(el1 != el2 for el1, el2 in zip(seq1, seq2))
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Gene finding
-    def find_genes(sequence):
+
+# Function for Gene finding
+def find_genes(sequence):
     if is_valid_sequence(sequence):
         start_codon = "ATG"
         stop_codons = ["TAA", "TAG", "TGA"]
@@ -73,35 +73,35 @@ from PIL import Image
         return genes
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Reverse complement
-    def reverse_complement(sequence):
+
+# Function for Reverse complement
+def reverse_complement(sequence):
     if is_valid_sequence(sequence):
         complement = {'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C'}
         apply_background_color("#FFD700")  
         return ''.join(complement[base] for base in reversed(sequence))
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for GC Content
-    def gc_content(sequence):
+
+# Function for GC Content
+def gc_content(sequence):
     if is_valid_sequence(sequence):
         gc_count = sequence.count('G') + sequence.count('C')
         apply_background_color("#A52A2A")  
         return (gc_count / len(sequence)) * 100
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Transcription
-    def transcription(sequence):
+
+# Function for Transcription
+def transcription(sequence):
     if is_valid_sequence(sequence):
         apply_background_color("#FFA500")  
         return sequence.replace('T', 'U')
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Translation (simple case, codon-to-amino acid)
-    def translation(sequence):
+
+# Function for Translation (simple case, codon-to-amino acid)
+def translation(sequence):
     if is_valid_sequence(sequence):
         codon_table = {
             'ATA': 'I', 'ATC': 'I', 'ATT': 'I', 'ATG': 'M',
@@ -129,9 +129,9 @@ from PIL import Image
         return protein
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    
-    # Function for Sequence alignment (simple version)
-    def sequence_alignment(seq1, seq2):
+
+# Function for Sequence alignment (simple version)
+def sequence_alignment(seq1, seq2):
     if is_valid_sequence(seq1) and is_valid_sequence(seq2):
         from difflib import SequenceMatcher
         matcher = SequenceMatcher(None, seq1, seq2)
@@ -140,14 +140,15 @@ from PIL import Image
         return f"Sequence similarity ratio: {match_ratio*100:.2f}%"
     else:
         return "Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G."
-    # Function to display the title page
-    def title_page():    
+
+# Function to display the title page
+def title_page():    
     #display_image()
     apply_background_color("#D6EAF8")  
     st.markdown("<h1 style='text-align: center;'>🧬 Bioinformatics Tool</h1>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>Welcome to the Bioinformatics Tool. This app provides several bioinformatics analysis tools such as Nucleotide count, K-mer analysis, Gene Finding, and more. Select an option from the menu to get started!</p>", unsafe_allow_html=True)
     footer()
-    def about_us_page():
+def about_us_page():
     #display_image1()
     apply_background_color("#F4ECF7")  
     st.markdown("<h1 style='text-align: center;'>About Us</h1>", unsafe_allow_html=True)
@@ -156,9 +157,9 @@ from PIL import Image
     st.markdown("<p style='text-align: center;'>Email: ai-tutorial@example.com</p>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center;'>Phone: (123)-456-7890</p>", unsafe_allow_html=True)
     footer()
-    
-    # Function for Nucleotide count page
-    def nucleotide_count_page():
+
+# Function for Nucleotide count page
+def nucleotide_count_page():
     #display_image2()
     apply_background_color("#FFC0CB")  
     st.markdown("<h2 style='text-align: center;'>Nucleotide Count</h2>", unsafe_allow_html=True)
@@ -170,8 +171,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for K-mer analysis page
-    def kmer_analysis_page():
+# Function for K-mer analysis page
+def kmer_analysis_page():
     #display_image3()
     apply_background_color("#008000")  
     st.markdown("<h2 style='text-align: center;'>K-mer Analysis</h2>", unsafe_allow_html=True)
@@ -185,8 +186,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Gene Finding page
-    def gene_finding_page():
+# Function for Gene Finding page
+def gene_finding_page():
     #display_image4()
     apply_background_color("#00FF00")  
     st.markdown("<h2 style='text-align: center;'>Gene Finding</h2>", unsafe_allow_html=True)
@@ -198,8 +199,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Hamming Distance page
-    def hamming_distance_page():
+# Function for Hamming Distance page
+def hamming_distance_page():
     #display_image5()
     apply_background_color("#D3D3D3")  
     st.markdown("<h2 style='text-align: center;'>Hamming Distance</h2>", unsafe_allow_html=True)
@@ -212,8 +213,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Reverse Complement page
-    def reverse_complement_page():
+# Function for Reverse Complement page
+def reverse_complement_page():
     #display_image6()
     apply_background_color("#FFD700")  
     st.markdown("<h2 style='text-align: center;'>Reverse Complement</h2>", unsafe_allow_html=True)
@@ -225,8 +226,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for GC Content page
-    def gc_content_page():
+# Function for GC Content page
+def gc_content_page():
     #display_image7()
     apply_background_color("#A52A2A")  
     st.markdown("<h2 style='text-align: center;'>GC Content</h2>", unsafe_allow_html=True)
@@ -238,8 +239,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Transcription page
-    def transcription_page():
+# Function for Transcription page
+def transcription_page():
     #display_image8()
     apply_background_color("#FFA500")  
     st.markdown("<h2 style='text-align: center;'>Transcription</h2>", unsafe_allow_html=True)
@@ -251,8 +252,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Translation page
-    def translation_page():
+# Function for Translation page
+def translation_page():
     #display_image9()
     apply_background_color("#FAD7A0")  
     st.markdown("<h2 style='text-align: center;'>Translation</h2>", unsafe_allow_html=True)
@@ -264,8 +265,8 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function for Sequence Alignment page
-    def sequence_alignment_page():
+# Function for Sequence Alignment page
+def sequence_alignment_page():
     #display_image10()
     apply_background_color("#808000")  
     st.markdown("<h2 style='text-align: center;'>Sequence Alignment</h2>", unsafe_allow_html=True)
@@ -278,9 +279,9 @@ from PIL import Image
         else:
             st.error("Invalid sequence! Please enter a DNA sequence containing only A, C, T, or G.")
     footer()
-    # Function to control page navigation
-    def main():
-    # Sidebar navigation to select pages
+# Function to control page navigation
+def main():
+# Sidebar navigation to select pages
     page = st.sidebar.radio(
         "Select a page:",
         ("Title Page", "Nucleotide Count", "K-mer Analysis", "Gene Finding", "Hamming Distance", 
@@ -288,8 +289,8 @@ from PIL import Image
          "Sequence Alignment", "About Us")
     )
     footer()
-    
-    # Display selected page
+
+# Display selected page
     if page == "Title Page":
         title_page()
     elif page == "Nucleotide Count":
