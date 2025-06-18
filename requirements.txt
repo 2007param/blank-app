@@ -1,2 +1,3 @@
 streamlit
 Bio
+pairwise2
